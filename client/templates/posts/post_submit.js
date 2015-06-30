@@ -18,11 +18,15 @@ Template.postSubmit.events({
       phone: $(e.target).find('[name=phone]').val()    
     };
 
+    dropzone.processQueue();    
+
     Meteor.call('postInsert', post, function(error, result) {
         if (error)       
-            return alert(error.reason);     
-        Router.go('postPage', {_id: result._id});    
+          return alert(error.reason);     
+          Router.go('postPage', {_id: result._id});    
     });
+
+    
   }
 });
 
@@ -35,15 +39,15 @@ Template.imageUpload.onRendered(function(){
 
   dropzone = new Dropzone("form#dropzone", {
     autoDiscover: false,
-    autoProcessQueue: true,
+    autoProcessQueue: false,
 
     success: function(file, done){
 
       Images.insert(file);
 
-      //if(dropzone.getQueuedFiles().length === 0){
-      //  dropzone.removeAllFiles();
-      //}
+      if(dropzone.getQueuedFiles().length === 0){
+        dropzone.removeAllFiles();
+      }
     }
   });
 

@@ -13,4 +13,3 @@ sacha:spin
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
-dbarrett:dropzonejs
