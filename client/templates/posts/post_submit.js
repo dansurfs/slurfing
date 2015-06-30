@@ -35,19 +35,15 @@ Template.imageUpload.onRendered(function(){
 
   dropzone = new Dropzone("form#dropzone", {
     autoDiscover: false,
-    autoProcessQueue: false,
-    success: function(file, done){
-      Images.insert(file, function(err, file){
-        if(err){
-          console.log("Error");
-        } else {
-          console.log("Success");
-        };
-      });
+    autoProcessQueue: true,
 
-      if(dropzone.getQueuedFiles().length === 0){
-        dropzone.removeAllFiles();
-      }
+    success: function(file, done){
+
+      Images.insert(file);
+
+      //if(dropzone.getQueuedFiles().length === 0){
+      //  dropzone.removeAllFiles();
+      //}
     }
   });
 
